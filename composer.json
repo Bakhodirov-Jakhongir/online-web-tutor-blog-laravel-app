@@ -9,7 +9,6 @@
         "arcanedev/log-viewer": "^8.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.3",
-        "haruncpi/laravel-id-generator": "^1.1",
         "jenssegers/agent": "^2.6",
         "josiasmontag/laravel-recaptchav3": "^0.6.0",
         "laravel/framework": "^8.54",

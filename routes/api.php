@@ -54,3 +54,6 @@ Route::get('devices', [DeviceController::class, 'index']);
 Route::post('device', [DeviceController::class, 'store']);
 Route::put('device', [DeviceController::class, 'update']);
 Route::delete('device', [DeviceController::class, 'delete']);
+
+//Case Sensitive query
+Route::get('v1/case/sensitive/query/product', [ProductController::class, 'searchCaseSensitive']);

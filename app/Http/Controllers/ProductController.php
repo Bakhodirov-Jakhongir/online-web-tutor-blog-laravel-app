@@ -169,4 +169,21 @@ class ProductController extends Controller
             'new-products' => $newProducts
         ], 200);
     }
+
+    public function searchCaseSensitive(Request $request)
+    {
+        $product = Product::select('id', 'name', 'description')->where(Product::raw('BINARY name'), $request->name)->get()->toArray();
+
+        if ($product == null) {
+            return response()->json([
+                'success' => true,
+                'message' => 'there is no any product'
+            ], 200);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $product
+        ], 200);
+    }
 }
