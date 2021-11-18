@@ -27,9 +27,9 @@ use App\Http\Controllers\DropdownController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('stripe', [StripePaymentController::class, 'stripe']);
 Route::post('stripe', [StripePaymentController::class, 'stripePost'])->name('stripe.post');
@@ -151,3 +151,7 @@ Route::get('excel/export', [DataExportContoller::class, 'export']);
 Route::get('dropdown', [DropdownController::class, 'index']);
 Route::get('getState', [DropdownController::class, 'getState'])->name('getState');
 Route::get('getCity', [DropdownController::class, 'getCity'])->name('getCity');
+
+
+//Notification api's
+Route::get('/send-notification', [NotificationController::class, 'sendOfferNotification']);

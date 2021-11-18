@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use App\Models\Size;
+use App\Models\Employee;
 
 class SiteController extends Controller
 {
@@ -60,5 +62,27 @@ class SiteController extends Controller
         echo $statusCode; // status code
 
         dd($responseBody); // body response
+    }
+
+    public function getData()
+    {
+        $cross_join = Size::crossJoin("colors")->get();
+
+        $right_join_data = Employee::rightJoin("projects", function ($join) {
+            $join->on("projects.employee_id", "=", "employees.id");
+        })->get();
+
+        $query = Employee::rightJoin("projects", function ($join) {
+            $join->on("projects.employee_id", "=", "employees.id");
+        })->toSql();
+
+        return response()->json([
+            'status' => true,
+            'data' => [
+                'cross-join' => $cross_join,
+                'rigt-join' => $right_join_data,
+                'query' => $query
+            ]
+        ], 200);
     }
 }

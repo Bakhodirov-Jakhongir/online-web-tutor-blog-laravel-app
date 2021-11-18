@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\OffersNotification;
 
 class NotificationController extends Controller
 {
@@ -179,5 +181,28 @@ class NotificationController extends Controller
         curl_close($ch);
 
         return $response;
+    }
+
+    public function sendOfferNotification()
+    {
+        $userSchema = User::first();
+
+        $offerData = [
+            'name' => 'BOGO',
+            'body' => 'You received an offer.',
+            'thanks' => 'Thank you',
+            'offerText' => 'Check out the offer',
+            'offerUrl' => url('/'),
+            'offer_id' => 007
+        ];
+
+        // Notification::send($userSchema, new OffersNotification($offerData));
+
+        // dd('Task completed!');
+
+        return response()->json([
+            'status' => true,
+            'data' => $offerData
+        ]);
     }
 }
